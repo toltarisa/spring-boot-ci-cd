@@ -3,8 +3,11 @@ secure: "CaO7CWU9gmi+wyAj0EU7trYCQcQr9Iq8C5aY2djsgnMNux3XAebhpIEd7IpDwMgaraGyNI+
 jdk:
   - openjdk11
 script:
-  - ./mvnw clean install
+  - ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install
   - ./mvnw deploy jib:build -P deploy-docker
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
