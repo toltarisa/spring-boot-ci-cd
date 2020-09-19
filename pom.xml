@@ -11,12 +11,39 @@
 	<groupId>com.example</groupId>
 	<artifactId>spring-boot-ci-cd</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<profiles>
+		<profile>
+			<id>deploy-docker</id>
+			<properties>
+				<maven.deploy.skip>true</maven.deploy.skip>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+						<version>2.2.0</version>
+						<configuration>
+							<to>
+								<image>isatoltar45/spring-boot-ci-cd</image>
+								<tags>
+									<tag>${project.version}</tag>
+									<tag>latest</tag>
+								</tags>
+							</to>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<name>spring-boot-ci-cd</name>
 	<description>Example project for applying ci cd process on spring boot app</description>
 
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
 
 	<dependencies>
 		<dependency>
