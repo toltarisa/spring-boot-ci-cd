@@ -1,11 +1,11 @@
 language: java
 secure: "CaO7CWU9gmi+wyAj0EU7trYCQcQr9Iq8C5aY2djsgnMNux3XAebhpIEd7IpDwMgaraGyNI+iurxC0idKKK2sYWkXf1kuRgvzYeXMuxi33SInohXeEVHyo3f+i/rRc6Cdky1u1qDxhld2E/94oBU3dfnmUMNCQAnVFpHlbN2AjKbMP63UAGsQ9mhp4BP25XzasAFvoMSr3eCEnv6toy8LRZZrLvt49Ofizb6XKnaXYplTmAYNntXMlnz5snAHpeIBE2qNLJMEK2iCe1Z9IWiZJkSbfNiYENkWqL6QzwKDXq62G4vDpFHSP7ZMMvtihE9QmU8nnT6Xfe+I0OUwAniWyIKKuv4WortahjOyH1ZOEz6Ev9yIQcknE1WLgDxx2NE4rST1lIIMK3vg0gPlOMmwWZ2PpYcB0dJ+qlMI4iX9B8Q9/gaDg85r8VZ9apR7RlGGr4V3SN4QfGGqmTX/ChorNdHyEpYRyQl896OEIjAQ/ke5E5kRe6z+44+zJM/Jl6tCfJ+JiBHKjcForK2A6LbRsvJEovYCAdo3ZESkpJbHzI/8bNd8+kuDZJGBgiIAsP74aTff2z7MAGVKFzzgeVmOYfsEtiBjxtpJa9Sp78GYmastrTt7bSAog4D40qRSfgJ01QsOuNIDlgNGu3pLEb+n+dUbPDxoglFkTMVZHeYngB4="
 jdk:
-  - openjdk8
+  - openjdk11
 script:
   - ./mvnw clean install
   - ./mvnw deploy jib:build -P deploy-docker
 
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker pull adoptopenjdk/openjdk8
+  - docker pull adoptopenjdk/openjdk11
